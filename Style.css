@@ -6,7 +6,7 @@
 
 body{
     width: 100%;
-    background: black;
+    background: #0c111b;
     position: relative;
     font-family: roboto, sans-serif;
 }
@@ -91,20 +91,64 @@ body{
     text-decoration: none;
 }
 
-.primary-Comtainer{
+.carousel-Comtainer{
     width: 100%;
     position: relative;
     height: 450px;
     padding: 20PX O;
     overflow: hidden;
-    margin-top: 80px;
+    margin-top: auto;
 }
 
-.primary{
+.carousel{
     display: flex;
     width: 92%;
-    height: 100%;
+    height: 90%;
     position: relative;
     margin: auto;
 }
 
+.slider{ 
+    flex: 0 0 auto;
+    margin-right: 30px;
+    position: relative;
+    background: rgba(0,0,0,0.5);
+    border-radius: 5px;
+    width: 100%;
+    height: 80%;
+    left: 0;
+    transition: 2s;
+    overflow: hidden;
+}
+
+.slider img{
+    width: 70%;
+    min-height: 90%;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+.slide-cont{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(to right, #030b17 80%, #0c111b00);
+    color: white;
+}
+
+.movie-title{
+    padding-left:50px;
+    text-transform: capitalize;
+    margin-top: 80px;
+}
+
+.movie-des{
+    width: 80%;
+    line-height: 30px;
+    padding-left: 50px;
+    margin-top: 30px;
+    opacity: 0.8; 
+}
