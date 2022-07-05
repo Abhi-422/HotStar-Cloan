@@ -1,78 +1,120 @@
 let movies = [
-    {
-        name:"Falcon and The Winter Soilder",
-        des:"",
-        image:"images/slider 2.png"
-    },
-    {
-        name:"Loki",
-        des:"",
-        image:"images/slider 1.png"
-    },
-    {
-        name:"Wanda Vision",
-        des:"",
-        image:"images/slider 3.png"
-    },
-    {
-        name:"Raya and The Last Dragon",
-        des:"",
-        image:"images/slider 4.png"
-    },
-    {
-        name:"Luca",
-        des:"",
-        image:"images/slider 5.png"
-    }
+  {
+    name: "Falcon and The Winter Soilder",
+    des:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit porro et veniam excepturi, eaque voluptatem impedit nulla laboriosam facilis ut laboriosam libero!",
+    image: "images/slider_2.PNG"
+  },
+  {
+    name: "Loki",
+    des:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit porro et veniam excepturi, eaque voluptatem impedit nulla laboriosam facilis ut laboriosam libero!",
+    image: "images/slider_1.PNG"
+  },
+  {
+    name: "Wanda Vision",
+    des:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit porro et veniam excepturi, eaque voluptatem impedit nulla laboriosam facilis ut laboriosam libero!",
+    image: "images/slider_3.PNG"
+  },
+  {
+    name: "Raya and The Last Dragon",
+    des:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit porro et veniam excepturi, eaque voluptatem impedit nulla laboriosam facilis ut laboriosam libero!",
+    image: "images/slider_4.PNG"
+  },
+  {
+    name: "Luca",
+    des:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit porro et veniam excepturi, eaque voluptatem impedit nulla laboriosam facilis ut laboriosam libero!",
+    image: "images/slider_5.PNG"
+  }
 ];
 
-const carousel = document.querySelector('.csrousel');
+const carousel = document.querySelector(".carousel");
 let sliders = [];
-let sliderIndex = 0;
 
-const creatSlide=() => {
-    if (sliderIndex >= movies.length){
-        sliderIndex=0;
-    }
-    //Create DOC Emlement
-    let slide= document.createElement('div');
-    var imageElement= document.createElement('img');
-    let content= document.createElement('div');
-    let h1= document.createElement('h1');
-    let p= document.createElement('p');
+let slideIndex = 0; // to track current slide index.
 
-    //Attracting all elememts
-    imageElement.appendChild(document.createTextNode(movies[sliderIndex].image));
-    h1.appendChild(document.createTextNode(movies[sliderIndex].name));
-    p.appendChild(document.createTextNode(movies[sliderIndex].des));
-    content.appendChild(h1);
-    content.appendChild(p);
-    slide.appendChild(imageElement);
-    carousel.appendChild(slide);
+const createSlide = () => {
+  if (slideIndex >= movies.length) {
+    slideIndex = 0;
+  }
 
-    //setting up images 
-    imageElement.src=movies[sliderIndex].image;
-    sliderIndex++
+  // creating DOM element
+  let slide = document.createElement("div");
+  var imgElement = document.createElement("img");
+  let content = document.createElement("div");
+  let h1 = document.createElement("h1");
+  let p = document.createElement("p");
 
-    //Setting element classnames
-    slide.className='slider';
-    content.className='slider-Content';
-    h1.className='movie-title';
-    p.className='movie-des';
+  // attaching all elements
+  imgElement.appendChild(document.createTextNode(""));
+  h1.appendChild(document.createTextNode(movies[slideIndex].name));
+  p.appendChild(document.createTextNode(movies[slideIndex].des));
+  content.appendChild(h1);
+  content.appendChild(p);
+  slide.appendChild(content);
+  slide.appendChild(imgElement);
+  carousel.appendChild(slide);
 
-    sliders.push(slide);
+  // setting up image
+  imgElement.src = movies[slideIndex].image;
+  slideIndex++;
 
-    if (slide.length){
-        sliders[0].style.marginLeft = `calc(-${100 * (sliders.length - 2)}% - ${30 * (sliders.length -2)}px)`;
-    }
+  // setting elements classname
+  slide.className = "slider";
+  content.className = "slide-content";
+  h1.className = "movie-title";
+  p.className = "movie-des";
+
+  sliders.push(slide);
+
+  if (sliders.length) {
+    sliders[0].style.marginLeft = `calc(-${100 * (sliders.length - 2)}% - ${
+      30 * (sliders.length - 2)
+    }px)`;
+  }
 };
- 
-for (let i = 0 ; i <3 ; i++){    
-    creatSlide();    
+
+for (let i = 0; i < 3; i++) {
+  createSlide();
 }
 
-setInterval(()=>{
-    creatSlide();
-},3000);
+setInterval(() => {
+  createSlide();
+}, 3000);
 
- 
+//Video Cards
+
+const videoCards = [...document.querySelectorAll(".video-card")];
+
+videoCards.forEach((item) => {
+  item.addEventListener("mouseover", () => {
+    let video = item.children[1];
+    video.play();
+  });
+  item.addEventListener("mouseleave", () => {
+    let video = item.children[1];
+    video.pause();
+  });
+});
+
+//card sliders
+
+let cardContainers = [...document.querySelectorAll(".card-container")];
+let preBtns = [...document.querySelectorAll(".pre-btn")];
+let nxtBtns = [...document.querySelectorAll(".nxt-btn")];
+
+cardContainers.forEach((item, i) => {
+  let containerDimensions = item.getBoundingClientRect();
+  let containerWidth = containerDimensions.width;
+
+  nxtBtns[i].addEventListener("click", () => {
+    item.scrollLeft += containerWidth - 200;
+  });
+
+  preBtns[i].addEventListener("click", () => {
+    item.scrollLeft -= containerWidth + 200;
+  });
+});
